@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "514249345461",
+    "project_id": "lucidplus-chat-app",
+    "storage_bucket": "lucidplus-chat-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:514249345461:android:ca22520e675c3ac3ce31fc",
+        "android_client_info": {
+          "package_name": "com.example.lucidplus_chat_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "514249345461-7rdmkacakh7l8en2qit4g27um4c0g4i0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-nYwL2E6q6ouOWyU1-0u5wHCfraO93lY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "514249345461-7rdmkacakh7l8en2qit4g27um4c0g4i0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "514249345461-4a7ifm902kq2jfgm8qbjjrrl81mrmod7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.lucidplusChatApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

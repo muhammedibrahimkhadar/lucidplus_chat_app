@@ -22,6 +22,7 @@ mixin _$SignupScreenEvent {
     required TResult Function(BuildContext ctx, GlobalKey<FormState> formkey,
             String? fullname, String? password, String? email)
         validateAndRegister,
+    required TResult Function(BuildContext ctx) navigate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$SignupScreenEvent {
     TResult? Function(BuildContext ctx, GlobalKey<FormState> formkey,
             String? fullname, String? password, String? email)?
         validateAndRegister,
+    TResult? Function(BuildContext ctx)? navigate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$SignupScreenEvent {
     TResult Function(BuildContext ctx, GlobalKey<FormState> formkey,
             String? fullname, String? password, String? email)?
         validateAndRegister,
+    TResult Function(BuildContext ctx)? navigate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -45,18 +48,21 @@ mixin _$SignupScreenEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Register value) validateAndRegister,
+    required TResult Function(_Nav value) navigate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Register value)? validateAndRegister,
+    TResult? Function(_Nav value)? navigate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Register value)? validateAndRegister,
+    TResult Function(_Nav value)? navigate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -121,6 +127,7 @@ class _$_Started implements _Started {
     required TResult Function(BuildContext ctx, GlobalKey<FormState> formkey,
             String? fullname, String? password, String? email)
         validateAndRegister,
+    required TResult Function(BuildContext ctx) navigate,
   }) {
     return started();
   }
@@ -132,6 +139,7 @@ class _$_Started implements _Started {
     TResult? Function(BuildContext ctx, GlobalKey<FormState> formkey,
             String? fullname, String? password, String? email)?
         validateAndRegister,
+    TResult? Function(BuildContext ctx)? navigate,
   }) {
     return started?.call();
   }
@@ -143,6 +151,7 @@ class _$_Started implements _Started {
     TResult Function(BuildContext ctx, GlobalKey<FormState> formkey,
             String? fullname, String? password, String? email)?
         validateAndRegister,
+    TResult Function(BuildContext ctx)? navigate,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -156,6 +165,7 @@ class _$_Started implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Register value) validateAndRegister,
+    required TResult Function(_Nav value) navigate,
   }) {
     return started(this);
   }
@@ -165,6 +175,7 @@ class _$_Started implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Register value)? validateAndRegister,
+    TResult? Function(_Nav value)? navigate,
   }) {
     return started?.call(this);
   }
@@ -174,6 +185,7 @@ class _$_Started implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Register value)? validateAndRegister,
+    TResult Function(_Nav value)? navigate,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -300,6 +312,7 @@ class _$_Register implements _Register {
     required TResult Function(BuildContext ctx, GlobalKey<FormState> formkey,
             String? fullname, String? password, String? email)
         validateAndRegister,
+    required TResult Function(BuildContext ctx) navigate,
   }) {
     return validateAndRegister(ctx, formkey, fullname, password, email);
   }
@@ -311,6 +324,7 @@ class _$_Register implements _Register {
     TResult? Function(BuildContext ctx, GlobalKey<FormState> formkey,
             String? fullname, String? password, String? email)?
         validateAndRegister,
+    TResult? Function(BuildContext ctx)? navigate,
   }) {
     return validateAndRegister?.call(ctx, formkey, fullname, password, email);
   }
@@ -322,6 +336,7 @@ class _$_Register implements _Register {
     TResult Function(BuildContext ctx, GlobalKey<FormState> formkey,
             String? fullname, String? password, String? email)?
         validateAndRegister,
+    TResult Function(BuildContext ctx)? navigate,
     required TResult orElse(),
   }) {
     if (validateAndRegister != null) {
@@ -335,6 +350,7 @@ class _$_Register implements _Register {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Register value) validateAndRegister,
+    required TResult Function(_Nav value) navigate,
   }) {
     return validateAndRegister(this);
   }
@@ -344,6 +360,7 @@ class _$_Register implements _Register {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Register value)? validateAndRegister,
+    TResult? Function(_Nav value)? navigate,
   }) {
     return validateAndRegister?.call(this);
   }
@@ -353,6 +370,7 @@ class _$_Register implements _Register {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Register value)? validateAndRegister,
+    TResult Function(_Nav value)? navigate,
     required TResult orElse(),
   }) {
     if (validateAndRegister != null) {
@@ -378,6 +396,148 @@ abstract class _Register implements SignupScreenEvent {
   @JsonKey(ignore: true)
   _$$_RegisterCopyWith<_$_Register> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_NavCopyWith<$Res> {
+  factory _$$_NavCopyWith(_$_Nav value, $Res Function(_$_Nav) then) =
+      __$$_NavCopyWithImpl<$Res>;
+  @useResult
+  $Res call({BuildContext ctx});
+}
+
+/// @nodoc
+class __$$_NavCopyWithImpl<$Res>
+    extends _$SignupScreenEventCopyWithImpl<$Res, _$_Nav>
+    implements _$$_NavCopyWith<$Res> {
+  __$$_NavCopyWithImpl(_$_Nav _value, $Res Function(_$_Nav) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? ctx = null,
+  }) {
+    return _then(_$_Nav(
+      ctx: null == ctx
+          ? _value.ctx
+          : ctx // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Nav implements _Nav {
+  const _$_Nav({required this.ctx});
+
+  @override
+  final BuildContext ctx;
+
+  @override
+  String toString() {
+    return 'SignupScreenEvent.navigate(ctx: $ctx)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Nav &&
+            (identical(other.ctx, ctx) || other.ctx == ctx));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, ctx);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_NavCopyWith<_$_Nav> get copyWith =>
+      __$$_NavCopyWithImpl<_$_Nav>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(BuildContext ctx, GlobalKey<FormState> formkey,
+            String? fullname, String? password, String? email)
+        validateAndRegister,
+    required TResult Function(BuildContext ctx) navigate,
+  }) {
+    return navigate(ctx);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(BuildContext ctx, GlobalKey<FormState> formkey,
+            String? fullname, String? password, String? email)?
+        validateAndRegister,
+    TResult? Function(BuildContext ctx)? navigate,
+  }) {
+    return navigate?.call(ctx);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(BuildContext ctx, GlobalKey<FormState> formkey,
+            String? fullname, String? password, String? email)?
+        validateAndRegister,
+    TResult Function(BuildContext ctx)? navigate,
+    required TResult orElse(),
+  }) {
+    if (navigate != null) {
+      return navigate(ctx);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_Register value) validateAndRegister,
+    required TResult Function(_Nav value) navigate,
+  }) {
+    return navigate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_Register value)? validateAndRegister,
+    TResult? Function(_Nav value)? navigate,
+  }) {
+    return navigate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Register value)? validateAndRegister,
+    TResult Function(_Nav value)? navigate,
+    required TResult orElse(),
+  }) {
+    if (navigate != null) {
+      return navigate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Nav implements SignupScreenEvent {
+  const factory _Nav({required final BuildContext ctx}) = _$_Nav;
+
+  BuildContext get ctx;
+  @JsonKey(ignore: true)
+  _$$_NavCopyWith<_$_Nav> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

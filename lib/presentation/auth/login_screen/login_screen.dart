@@ -7,6 +7,8 @@ import 'package:lucidplus_chat_app/application/signin_screen_bloc/bloc/signin_sc
 
 class LoginScreen extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
+  String? password;
+  String? email;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,12 @@ class LoginScreen extends StatelessWidget {
               style: TextStyle(color: Colors.white, fontSize: 16),
             ),
             onPressed: () {
-              // login();
+              BlocProvider.of<SigninScreenBloc>(context).add(
+                  SigninScreenEvent.authenticateLogin(
+                      ctx: context,
+                      password: password!,
+                      email: email!,
+                      formkey: formKey));
             },
           ),
         ),
@@ -68,7 +75,9 @@ class LoginScreen extends StatelessWidget {
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     BlocProvider.of<SigninScreenBloc>(context)
-                        .add(SigninScreenEvent.goToRegisterPage(ctx: context));
+                        .add(SigninScreenEvent.goToRegisterPage(
+                      ctx: context,
+                    ));
                   }),
           ],
         )),
@@ -90,9 +99,14 @@ class LoginScreen extends StatelessWidget {
 
           // check tha validation
           validator: (val) {
+            if (RegExp(
+                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                .hasMatch(val!)) {
+              email = val;
+            }
             return RegExp(
                         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                    .hasMatch(val!)
+                    .hasMatch(val)
                 ? null
                 : "Please enter a valid email";
           },
@@ -110,6 +124,7 @@ class LoginScreen extends StatelessWidget {
             if (val!.length < 6) {
               return "Password must be at least 6 characters";
             } else {
+              password = val;
               return null;
             }
           },

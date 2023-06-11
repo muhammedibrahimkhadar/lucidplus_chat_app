@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '514249345461',
     projectId: 'lucidplus-chat-app',
     storageBucket: 'lucidplus-chat-app.appspot.com',
-    iosClientId: '514249345461-4a7ifm902kq2jfgm8qbjjrrl81mrmod7.apps.googleusercontent.com',
+    iosClientId:
+        '514249345461-4a7ifm902kq2jfgm8qbjjrrl81mrmod7.apps.googleusercontent.com',
     iosBundleId: 'com.example.lucidplusChatApp',
   );
 }

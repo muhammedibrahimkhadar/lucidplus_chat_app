@@ -1,4 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:lucidplus_chat_app/domain/routes/routes.dart';
@@ -11,6 +13,11 @@ class SigninScreenBloc extends Bloc<SigninScreenEvent, SigninScreenState> {
   SigninScreenBloc() : super(_Initial()) {
     on<SigninScreenEvent>((event, emit) {
       // TODO: implement event handler
+    });
+
+    on<_AuthLogin>((event, emit) async {
+      final re = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: event.email, password: event.password);
     });
 
     on<_NavigateToRegister>((event, emit) {

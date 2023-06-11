@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lucidplus_chat_app/application/splash_screen_bloc/bloc/splash_screen_bloc.dart';
@@ -15,7 +14,8 @@ class SplashScreen extends StatelessWidget {
   }
 
   Center _buildUI(BuildContext ctx) {
-    BlocProvider.of<SplashScreenBloc>(ctx).add(SplashScreenEvent.started(ctx: ctx));
+    BlocProvider.of<SplashScreenBloc>(ctx)
+        .add(SplashScreenEvent.started(ctx: ctx));
     return Center(
         child: Image.network(
       NetworkAssetPaths.lucidPlusLogoPath,

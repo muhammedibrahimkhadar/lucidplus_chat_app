@@ -14,11 +14,10 @@ part 'splash_screen_bloc.freezed.dart';
 
 class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
   SplashScreenBloc() : super(_Initial()) {
-    
-    Future<bool> getUserLoggedinStatus() async {
+    Future getUserLoggedinStatus() async {
       final securedStorageInstance = FlutterLocalSecuredStorage();
       final userLoggedinStatus = await securedStorageInstance
-          .getbool(SharedPreferenceKeys.userLoggedInKey);
+          .read(SharedPreferenceKeys.isUserLoggedInKey);
 
       log(userLoggedinStatus.toString());
       return userLoggedinStatus;
@@ -26,9 +25,13 @@ class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
 
     on<_Started>((event, emit) async {
       await Future.delayed(const Duration(seconds: 3));
-       
-      // if (await getUserLoggedinStatus()==false) {
-        Navigator.pushNamed(event.ctx, RoutPaths.loginScreen);
+
+      Navigator.pushNamed(event.ctx, RoutPaths.mainScreen);
+
+      // if (await getUserLoggedinStatus()==SPKeyValues.TRUE) {
+      //   Navigator.pushNamed(event.ctx, RoutPaths.loginScreen);
+      // }else{
+      //   Navigator.pushNamed(event.ctx, RoutPaths.signUpScreen);
       // }
     });
   }

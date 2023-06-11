@@ -16,19 +16,18 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: ((context) => SplashScreenBloc())),
         BlocProvider(create: ((context) => SigninScreenBloc())),
         BlocProvider(create: ((context) => SignupScreenBloc()))
-
       ],
       child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          routes: GetNamedRouts.getRouts(),
-          title: 'Lucidplus Chat App',
-          theme: ThemeData(
-            backgroundColor: Colors.white,
-            canvasColor: Colors.white,
-            primarySwatch: Colors.orange,
-          ),
-          initialRoute: RoutPaths.splashScreen,
+        debugShowCheckedModeBanner: false,
+        routes: GetNamedRouts.getRouts(),
+        title: 'Lucidplus Chat App',
+        theme: ThemeData(
+          backgroundColor: Colors.white,
+          canvasColor: Colors.white,
+          primarySwatch: Colors.orange,
         ),
+        initialRoute: RoutPaths.splashScreen,
+      ),
     );
   }
 }

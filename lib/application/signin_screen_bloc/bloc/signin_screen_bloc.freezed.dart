@@ -19,18 +19,27 @@ mixin _$SigninScreenEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
+    required TResult Function(BuildContext ctx, GlobalKey<FormState> formkey,
+            String password, String email)
+        authenticateLogin,
     required TResult Function(BuildContext ctx) goToRegisterPage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
+    TResult? Function(BuildContext ctx, GlobalKey<FormState> formkey,
+            String password, String email)?
+        authenticateLogin,
     TResult? Function(BuildContext ctx)? goToRegisterPage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function(BuildContext ctx, GlobalKey<FormState> formkey,
+            String password, String email)?
+        authenticateLogin,
     TResult Function(BuildContext ctx)? goToRegisterPage,
     required TResult orElse(),
   }) =>
@@ -38,18 +47,21 @@ mixin _$SigninScreenEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
+    required TResult Function(_AuthLogin value) authenticateLogin,
     required TResult Function(_NavigateToRegister value) goToRegisterPage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
+    TResult? Function(_AuthLogin value)? authenticateLogin,
     TResult? Function(_NavigateToRegister value)? goToRegisterPage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_AuthLogin value)? authenticateLogin,
     TResult Function(_NavigateToRegister value)? goToRegisterPage,
     required TResult orElse(),
   }) =>
@@ -112,6 +124,9 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
+    required TResult Function(BuildContext ctx, GlobalKey<FormState> formkey,
+            String password, String email)
+        authenticateLogin,
     required TResult Function(BuildContext ctx) goToRegisterPage,
   }) {
     return started();
@@ -121,6 +136,9 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
+    TResult? Function(BuildContext ctx, GlobalKey<FormState> formkey,
+            String password, String email)?
+        authenticateLogin,
     TResult? Function(BuildContext ctx)? goToRegisterPage,
   }) {
     return started?.call();
@@ -130,6 +148,9 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function(BuildContext ctx, GlobalKey<FormState> formkey,
+            String password, String email)?
+        authenticateLogin,
     TResult Function(BuildContext ctx)? goToRegisterPage,
     required TResult orElse(),
   }) {
@@ -143,6 +164,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
+    required TResult Function(_AuthLogin value) authenticateLogin,
     required TResult Function(_NavigateToRegister value) goToRegisterPage,
   }) {
     return started(this);
@@ -152,6 +174,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
+    TResult? Function(_AuthLogin value)? authenticateLogin,
     TResult? Function(_NavigateToRegister value)? goToRegisterPage,
   }) {
     return started?.call(this);
@@ -161,6 +184,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_AuthLogin value)? authenticateLogin,
     TResult Function(_NavigateToRegister value)? goToRegisterPage,
     required TResult orElse(),
   }) {
@@ -173,6 +197,191 @@ class _$_Started implements _Started {
 
 abstract class _Started implements SigninScreenEvent {
   const factory _Started() = _$_Started;
+}
+
+/// @nodoc
+abstract class _$$_AuthLoginCopyWith<$Res> {
+  factory _$$_AuthLoginCopyWith(
+          _$_AuthLogin value, $Res Function(_$_AuthLogin) then) =
+      __$$_AuthLoginCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {BuildContext ctx,
+      GlobalKey<FormState> formkey,
+      String password,
+      String email});
+}
+
+/// @nodoc
+class __$$_AuthLoginCopyWithImpl<$Res>
+    extends _$SigninScreenEventCopyWithImpl<$Res, _$_AuthLogin>
+    implements _$$_AuthLoginCopyWith<$Res> {
+  __$$_AuthLoginCopyWithImpl(
+      _$_AuthLogin _value, $Res Function(_$_AuthLogin) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? ctx = null,
+    Object? formkey = null,
+    Object? password = null,
+    Object? email = null,
+  }) {
+    return _then(_$_AuthLogin(
+      ctx: null == ctx
+          ? _value.ctx
+          : ctx // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+      formkey: null == formkey
+          ? _value.formkey
+          : formkey // ignore: cast_nullable_to_non_nullable
+              as GlobalKey<FormState>,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_AuthLogin implements _AuthLogin {
+  const _$_AuthLogin(
+      {required this.ctx,
+      required this.formkey,
+      required this.password,
+      required this.email});
+
+  @override
+  final BuildContext ctx;
+  @override
+  final GlobalKey<FormState> formkey;
+  @override
+  final String password;
+  @override
+  final String email;
+
+  @override
+  String toString() {
+    return 'SigninScreenEvent.authenticateLogin(ctx: $ctx, formkey: $formkey, password: $password, email: $email)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AuthLogin &&
+            (identical(other.ctx, ctx) || other.ctx == ctx) &&
+            (identical(other.formkey, formkey) || other.formkey == formkey) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.email, email) || other.email == email));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, ctx, formkey, password, email);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AuthLoginCopyWith<_$_AuthLogin> get copyWith =>
+      __$$_AuthLoginCopyWithImpl<_$_AuthLogin>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(BuildContext ctx, GlobalKey<FormState> formkey,
+            String password, String email)
+        authenticateLogin,
+    required TResult Function(BuildContext ctx) goToRegisterPage,
+  }) {
+    return authenticateLogin(ctx, formkey, password, email);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(BuildContext ctx, GlobalKey<FormState> formkey,
+            String password, String email)?
+        authenticateLogin,
+    TResult? Function(BuildContext ctx)? goToRegisterPage,
+  }) {
+    return authenticateLogin?.call(ctx, formkey, password, email);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(BuildContext ctx, GlobalKey<FormState> formkey,
+            String password, String email)?
+        authenticateLogin,
+    TResult Function(BuildContext ctx)? goToRegisterPage,
+    required TResult orElse(),
+  }) {
+    if (authenticateLogin != null) {
+      return authenticateLogin(ctx, formkey, password, email);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_AuthLogin value) authenticateLogin,
+    required TResult Function(_NavigateToRegister value) goToRegisterPage,
+  }) {
+    return authenticateLogin(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_AuthLogin value)? authenticateLogin,
+    TResult? Function(_NavigateToRegister value)? goToRegisterPage,
+  }) {
+    return authenticateLogin?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_AuthLogin value)? authenticateLogin,
+    TResult Function(_NavigateToRegister value)? goToRegisterPage,
+    required TResult orElse(),
+  }) {
+    if (authenticateLogin != null) {
+      return authenticateLogin(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AuthLogin implements SigninScreenEvent {
+  const factory _AuthLogin(
+      {required final BuildContext ctx,
+      required final GlobalKey<FormState> formkey,
+      required final String password,
+      required final String email}) = _$_AuthLogin;
+
+  BuildContext get ctx;
+  GlobalKey<FormState> get formkey;
+  String get password;
+  String get email;
+  @JsonKey(ignore: true)
+  _$$_AuthLoginCopyWith<_$_AuthLogin> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -241,6 +450,9 @@ class _$_NavigateToRegister implements _NavigateToRegister {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
+    required TResult Function(BuildContext ctx, GlobalKey<FormState> formkey,
+            String password, String email)
+        authenticateLogin,
     required TResult Function(BuildContext ctx) goToRegisterPage,
   }) {
     return goToRegisterPage(ctx);
@@ -250,6 +462,9 @@ class _$_NavigateToRegister implements _NavigateToRegister {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
+    TResult? Function(BuildContext ctx, GlobalKey<FormState> formkey,
+            String password, String email)?
+        authenticateLogin,
     TResult? Function(BuildContext ctx)? goToRegisterPage,
   }) {
     return goToRegisterPage?.call(ctx);
@@ -259,6 +474,9 @@ class _$_NavigateToRegister implements _NavigateToRegister {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function(BuildContext ctx, GlobalKey<FormState> formkey,
+            String password, String email)?
+        authenticateLogin,
     TResult Function(BuildContext ctx)? goToRegisterPage,
     required TResult orElse(),
   }) {
@@ -272,6 +490,7 @@ class _$_NavigateToRegister implements _NavigateToRegister {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
+    required TResult Function(_AuthLogin value) authenticateLogin,
     required TResult Function(_NavigateToRegister value) goToRegisterPage,
   }) {
     return goToRegisterPage(this);
@@ -281,6 +500,7 @@ class _$_NavigateToRegister implements _NavigateToRegister {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
+    TResult? Function(_AuthLogin value)? authenticateLogin,
     TResult? Function(_NavigateToRegister value)? goToRegisterPage,
   }) {
     return goToRegisterPage?.call(this);
@@ -290,6 +510,7 @@ class _$_NavigateToRegister implements _NavigateToRegister {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_AuthLogin value)? authenticateLogin,
     TResult Function(_NavigateToRegister value)? goToRegisterPage,
     required TResult orElse(),
   }) {

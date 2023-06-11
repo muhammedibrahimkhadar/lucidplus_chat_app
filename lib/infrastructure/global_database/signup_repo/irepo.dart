@@ -25,7 +25,6 @@ class FirebaseAuthImpl implements IFirebaseAuthenticateRepo {
       } else {
         return false;
       }
-      
     } on FirebaseAuthException catch (e) {
       log(e.toString());
       return e;

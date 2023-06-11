@@ -1,7 +1,12 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lucidplus_chat_app/application/signup_screen_bloc/bloc/signup_screen_bloc.dart';
+
+import '../../../infrastructure/global_database/signup_repo/irepo.dart';
 
 class SignupScreen extends StatelessWidget {
   SignupScreen({Key? key}) : super(key: key);
@@ -24,11 +29,11 @@ class SignupScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   const Text(
-                    "Groupie",
+                    "App Name",
                     style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 10),
-                  const Text("Create your account now to chat and explore",
+                  const Text("Create your account now ",
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w400)),
                   Image.asset("assets/register.png"),
@@ -40,7 +45,7 @@ class SignupScreen extends StatelessWidget {
                           color: Theme.of(context).primaryColor,
                         )),
                     onChanged: (val) {
-                        fullName = val;
+                      fullName = val;
                     },
                     validator: (val) {
                       if (val!.isNotEmpty) {
@@ -61,9 +66,7 @@ class SignupScreen extends StatelessWidget {
                           color: Theme.of(context).primaryColor,
                         )),
                     onChanged: (val) {
-                      
-                        email = val;
-                      
+                      email = val;
                     },
 
                     // check tha validation
@@ -93,7 +96,7 @@ class SignupScreen extends StatelessWidget {
                     },
                     onChanged: (val) {
                       // setState(() {
-                        password = val;
+                      password = val;
                       // });
                     },
                   ),
@@ -112,15 +115,28 @@ class SignupScreen extends StatelessWidget {
                         "Register",
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
-                      onPressed: () {
+                      onPressed: () async {
                         BlocProvider.of<SignupScreenBloc>(context).add(
                             SignupScreenEvent.validateAndRegister(
-                              ctx: context,
+                                ctx: context,
                                 formkey: formKey,
                                 fullname: fullName,
                                 password: password,
-                                email: email
-                                ));
+                                email: email));
+
+                        // final firebaseAuthInstance = FirebaseAuth.instance;
+                        // FirebaseAuthImpl authService = FirebaseAuthImpl();
+
+                        // await (authService.registerUserWithEmailAndPassword(
+                        //     fullName.toString(),
+                        //     email.toString(),
+                        // password.toString()).then((value)async => log("message")));
+                        // await firebaseAuthInstance
+                        //     .createUserWithEmailAndPassword(
+                        //         email: email!, password: password!).then((value) async=>log("khvkhvkhvkvkvhvk") );
+
+                        BlocProvider.of<SignupScreenBloc>(context)
+                            .add(SignupScreenEvent.navigate(ctx: context));
                       },
                     ),
                   ),

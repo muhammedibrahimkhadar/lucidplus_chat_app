@@ -1,9 +1,12 @@
 import 'dart:developer';
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:lucidplus_chat_app/domain/routes/routes.dart';
+import 'package:lucidplus_chat_app/infrastructure/global_database/signup_repo/irepo.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'package:sensors_plus/sensors_plus.dart';
@@ -26,8 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-
-    getval();
 
     getContactPermission();
   }
@@ -81,9 +82,18 @@ class _HomeScreenState extends State<HomeScreen> {
     });
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 59, 56, 56),
+        
+        leading: Icon(Icons.menu),
+        
         title: Text("Home"),
       ),
       body: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [
+            Colors.black,
+            Color.fromARGB(255, 46, 46, 46),
+          ], begin: Alignment.bottomLeft, end: Alignment.topRight)),
           child: isenterd
               ? Center(
                   child: Text("You are good to go !!!"),
@@ -100,16 +110,23 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                               onTap: () async => Permission.contacts.request(),
                               decoration: InputDecoration(
+                                hintStyle: TextStyle(color: Colors.grey),
                                 hintText: "Enter the telegram user ID",
                                 enabledBorder: OutlineInputBorder(
+                                   borderSide: BorderSide(color: Colors.grey),
                                     borderRadius: BorderRadius.circular(8)),
                               ))),
 
-                      const Padding(
-                          padding: EdgeInsets.only(
+                      Padding(
+                          padding:const EdgeInsets.only(
                               left: 30, right: 30, top: 15, bottom: 15),
-                          child: Text(
-                              "***Please note that this is a one time process so please make sure you enter correct user id***")),
+                          child: GestureDetector(
+                            onTap: () {},
+                            child:const Text(
+                              "***Please note that this is a one time process so please make sure you enter correct user id***",
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          )),
 
                       ElevatedButton(
                         onPressed: () async {

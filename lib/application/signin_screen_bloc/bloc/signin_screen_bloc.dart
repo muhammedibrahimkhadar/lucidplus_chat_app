@@ -34,7 +34,7 @@ class SigninScreenBloc extends Bloc<SigninScreenEvent, SigninScreenState> {
     });
 
     on<_NavigateToRegister>((event, emit) {
-      Navigator.pushNamed(event.ctx, RoutPaths.signUpScreen);
+      Navigator.pushNamedAndRemoveUntil(event.ctx, RoutPaths.signUpScreen,(Route<dynamic> route) => false);
     });
   }
 }

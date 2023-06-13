@@ -26,7 +26,7 @@ class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
     on<_Started>((event, emit) async {
       await Future.delayed(const Duration(seconds: 3));
 
-      Navigator.pushNamed(event.ctx, RoutPaths.loginScreen);
+      Navigator.pushNamedAndRemoveUntil(event.ctx, RoutPaths.loginScreen,(Route<dynamic> route) => false);
 
       // if (await getUserLoggedinStatus()==SPKeyValues.TRUE) {
       //   Navigator.pushNamed(event.ctx, RoutPaths.loginScreen);

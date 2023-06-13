@@ -1,21 +1,17 @@
-import 'dart:convert';
-import 'dart:developer';
+
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:lucidplus_chat_app/infrastructure/global_database/telegram_apis/send_message/irepo.dart';
-import 'package:lucidplus_chat_app/presentation/home/home.dart';
-import 'package:lucidplus_chat_app/presentation/splash_screen/data_x/data_x.dart';
-import 'package:teledart/teledart.dart';
-import 'package:teledart/telegram.dart';
 
-import 'domain/api/auth_token.dart';
 import 'infrastructure/global_database/firebase/firebase_options.dart';
 import 'presentation/app.dart';
 
 Future<void> main() async {
-  // String temp = '{"status": "9208423049823094","message": ["your value" ]}';
+
+
+
+
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(

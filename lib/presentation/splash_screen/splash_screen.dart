@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lucidplus_chat_app/application/splash_screen_bloc/bloc/splash_screen_bloc.dart';
-import 'package:lucidplus_chat_app/domain/constants/network_asset_paths.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -29,7 +28,7 @@ class SplashScreen extends StatelessWidget {
         )
       ),
       child: Center(
-          child: SvgPicture.asset("assets/logo.svg")),
+          child: SvgPicture.asset("assets/logo.svg",height: MediaQuery.of(ctx).size.width-80,width: MediaQuery.of(ctx).size.width-80,)),
     );
   }
 }

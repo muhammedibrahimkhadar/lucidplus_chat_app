@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: GetNamedRouts.getRouts(),
-        title: 'Lucidplus Chat App',
+        title: '',
         theme: ThemeData(
           backgroundColor: Colors.white,
           canvasColor: Colors.white,

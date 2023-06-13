@@ -1,13 +1,10 @@
 import 'dart:developer';
-import 'dart:ui';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lucidplus_chat_app/application/signin_screen_bloc/bloc/signin_screen_bloc.dart';
 import 'package:lucidplus_chat_app/domain/routes/routes.dart';
 
@@ -48,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  _headder(),
+                  _headder(context),
                   StreamBuilder(
                     stream: FirebaseAuth.instance.authStateChanges(),
                     builder: (context, snapshot) {
@@ -74,12 +71,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     stream: FirebaseAuth.instance.authStateChanges(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
-                        Navigator.of(context).pushNamed(RoutPaths.homeScreen);
-                        return GestureDetector(
-                            onTap: () {
-                              FirebaseAuth.instance.signOut();
-                            },
-                            child: Text("yes",style: TextStyle(fontSize: 20,color: Colors.white),));
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            RoutPaths.homeScreen,
+                            (Route<dynamic> route) => false);
+                        return SizedBox();
                       } else {
                         return SizedBox();
                       }
@@ -136,10 +131,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Colors.grey, decoration: TextDecoration.underline),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    BlocProvider.of<SigninScreenBloc>(context)
-                        .add(SigninScreenEvent.goToRegisterPage(
-                      ctx: context,
-                    ));
+                    Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        RoutPaths.signUpScreen,
+                        (Route<dynamic> route) => false);
                   }),
           ],
         )),
@@ -205,12 +200,16 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Column _headder() {
+  Column _headder(BuildContext ctx) {
     return Column(
       children: [
-        SvgPicture.asset("assets/logo.svg"),
+        SvgPicture.asset(
+          "assets/logo.svg",
+          height: MediaQuery.of(ctx).size.width - 140,
+          width: MediaQuery.of(ctx).size.width - 140,
+        ),
         SizedBox(
-          height: 25,
+          height: 45,
         ),
         const Text(
           "Women Safety SOS Application",

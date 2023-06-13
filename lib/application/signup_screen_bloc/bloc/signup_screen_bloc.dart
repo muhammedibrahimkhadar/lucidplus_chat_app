@@ -38,32 +38,11 @@ class SignupScreenBloc extends Bloc<SignupScreenEvent, SignupScreenState> {
                 email: event.email!, password: event.password!)
             .then((value) async => log(value.toString()));
 
-        try {
-          User user =
-              (await firebaseAuthInstance.createUserWithEmailAndPassword(
-                      email: event.email!, password: event.password!))
-                  .user!;
-
-          if (user != null) {
-            FlutterLocalSecuredStorage securedStorageInstance =
-                FlutterLocalSecuredStorage();
-
-            await DatabaseService(uid: user.uid)
-                .updateUserData(event.email!, event.password!);
-            await securedStorageInstance.write(
-                SharedPreferenceKeys.userEmailKey, event.email!);
-            await securedStorageInstance.write(
-                SharedPreferenceKeys.userNameKey, event.fullname!);
-            await securedStorageInstance.write(
-                SharedPreferenceKeys.isUserLoggedInKey, SPKeyValues.TRUE);
-          }
-        } catch (e) {
-          log(e.toString());
-        }
+        
       }
     });
 
     on<_Nav>((event, emit) =>
-        {Navigator.pushNamed(event.ctx, RoutPaths.splashScreen)});
+        {Navigator.pushNamedAndRemoveUntil(event.ctx, RoutPaths.splashScreen,(Route<dynamic> route) => false)});
   }
 }

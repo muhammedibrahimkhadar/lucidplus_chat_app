@@ -55,15 +55,15 @@ class _HomeScreenState extends State<HomeScreen> {
     String? _latestHardwareButtonEvent;
 
     StreamSubscription<String>? _buttonSubscription;
-    double dx = 60, dy = 350;
+    double dx = 7, dy = 350;
 
     userAccelerometerEvents.listen((UserAccelerometerEvent event) async {
       // log(event.x.toString());
-      if (event.x >= 60 ||
-          event.y >= 60 ||
-          event.x <= -60 ||
-          event.y <= -60 ||
-          (event.z >= 60 || event.z <= -60)) {
+      if (event.x >= 7 ||
+          event.y >= 7 ||
+          event.x <= -7 ||
+          event.y <= -7 ||
+          (event.z >= 7 || event.z <= -7)) {
         var id = await FlutterLocalSecuredStorage().read(
           "telegram_id",
         );
@@ -75,8 +75,8 @@ class _HomeScreenState extends State<HomeScreen> {
         final stringPos =
             "https://maps.google.com/?q=${pos.latitude},${pos.longitude}";
         ITelegramSendMessageRepoImpl instance = ITelegramSendMessageRepoImpl();
-        instance.sendMessageTo(
-            id, "Hello chtbot activated your  and  her location is $stringPos");
+        instance.sendMessageTo(id,
+            "Dear user this is an SOS message in the case of EMERGENCY the users current location is at $stringPos");
       }
     });
     return Scaffold(
@@ -100,10 +100,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                               onTap: () async => Permission.contacts.request(),
                               decoration: InputDecoration(
-                                hintText: "Enter Contact",
+                                hintText: "Enter the telegram user ID",
                                 enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8)),
                               ))),
+
+                      const Padding(
+                          padding: EdgeInsets.only(
+                              left: 30, right: 30, top: 15, bottom: 15),
+                          child: Text(
+                              "***Please note that this is a one time process so please make sure you enter correct user id***")),
 
                       ElevatedButton(
                         onPressed: () async {

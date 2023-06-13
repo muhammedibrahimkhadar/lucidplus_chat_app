@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,8 +18,19 @@ class SigninScreenBloc extends Bloc<SigninScreenEvent, SigninScreenState> {
     });
 
     on<_AuthLogin>((event, emit) async {
-      final re = await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: event.email, password: event.password);
+      try {
+        final re = await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: event.email, password: event.password);
+      } catch (e) {
+     
+        log(e.toString());
+      }
+
+      var stream = FirebaseAuth.instance.authStateChanges();
+
+      stream.listen((event) {
+        print(event!.uid);
+      });
     });
 
     on<_NavigateToRegister>((event, emit) {

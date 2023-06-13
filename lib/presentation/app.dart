@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           backgroundColor: Colors.white,
           canvasColor: Colors.white,
-          primarySwatch: Colors.orange,
+          primarySwatch: Colors.pink,
         ),
         initialRoute: RoutPaths.splashScreen,
       ),

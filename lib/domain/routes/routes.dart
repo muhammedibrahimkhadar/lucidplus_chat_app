@@ -19,7 +19,7 @@ abstract class GetNamedRouts {
       RoutPaths.loginScreen: (context) => LoginScreen(),
       RoutPaths.signUpScreen: (context) => SignupScreen(),
       RoutPaths.homeScreen: (context) => HomeScreen(),
-      RoutPaths.mainScreen: (context) => MainScreen(),
+      // RoutPaths.mainScreen: (context) => MainScreen(),
     };
   }
 }

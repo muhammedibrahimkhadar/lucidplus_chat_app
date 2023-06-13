@@ -18,7 +18,7 @@ class FlutterLocalSecuredStorage {
     return token;
   }
 
-  getbool(String data) async {
+  Future<bool> getbool(String data) async {
     final status = await storage.read(key: data);
     if (status == null || status == '') {
       return false;

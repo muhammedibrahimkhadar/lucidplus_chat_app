@@ -15,7 +15,7 @@ import 'infrastructure/global_database/firebase/firebase_options.dart';
 import 'presentation/app.dart';
 
 Future<void> main() async {
-  String temp = '{"status": "9208423049823094","message": ["your value" ]}';
+  // String temp = '{"status": "9208423049823094","message": ["your value" ]}';
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -33,13 +33,7 @@ Future<void> main() async {
       return Future.error("Location permission denied");
     }
   }
-  final pos = await Geolocator.getCurrentPosition();
-  print(pos);
-  final stringPos =
-      "https://maps.google.com/?q=${pos.latitude},${pos.longitude}";
-  ITelegramSendMessageRepoImpl instance = ITelegramSendMessageRepoImpl();
-  instance.sendMessageTo("886468433",
-      "Hello chtbot activated your  and  her location is $stringPos");
+  
   // log(await Geolocator.getCurrentPosition().toString());
   //  Geolocator.requestPermission();
   runApp(MyApp());

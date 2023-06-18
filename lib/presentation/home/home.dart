@@ -269,7 +269,7 @@ class _HomeScreenState extends State<HomeScreen> {
               GestureDetector(
                 onTap: () async {
                   final url =
-                      "https://maps.google.com/?q=police+stations+with+in+10kms";
+                      "https://www.google.com/maps/search/police+stations+near+me/";
                   try {
                     await launchUrl(Uri.parse(url));
                   } catch (e) {

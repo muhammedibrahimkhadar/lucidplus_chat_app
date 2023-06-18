@@ -227,7 +227,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
   Container _callForHelpSection(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 50, right: 25, left: 25),

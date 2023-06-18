@@ -236,7 +236,9 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  
+                },
                 child: Container(
                   height: 150,
                   decoration: BoxDecoration(

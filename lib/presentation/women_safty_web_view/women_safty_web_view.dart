@@ -35,7 +35,7 @@ class _WomenSaftyWebViewState extends State<WomenSaftyWebView> {
             },
           ),
           if (_isLoading)
-            Center(
+          const Center(
               child: CircularProgressIndicator(),
             )
         ],

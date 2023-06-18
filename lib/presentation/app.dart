@@ -5,6 +5,7 @@ import 'package:lucidplus_chat_app/application/splash_screen_bloc/bloc/splash_sc
 
 import '../application/signup_screen_bloc/bloc/signup_screen_bloc.dart';
 import '../domain/routes/routes.dart';
+import 'home/home.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
           canvasColor: Colors.white,
           primarySwatch: Colors.pink,
         ),
-        initialRoute: RoutPaths.splashScreen,
+        // initialRoute: RoutPaths.splashScreen,
+        home: HomeScreen(),
       ),
     );
   }

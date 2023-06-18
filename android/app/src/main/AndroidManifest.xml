@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lucidplus_chat_app">
    <application
-        android:label="lucidplus_chat_app"
+        android:label="Women Safety SOS Application"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -20,13 +20,15 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: Container(
+          height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-          Colors.black,
-          Color.fromARGB(255, 46, 46, 46),
-        ], begin: Alignment.bottomLeft, end: Alignment.topRight)),
+              gradient: LinearGradient(colors: [
+            Colors.black,
+            Color.fromARGB(255, 46, 46, 46),
+          ], begin: Alignment.bottomLeft, end: Alignment.topRight)),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 80),
             child: Form(
@@ -100,12 +102,10 @@ class SignupScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 15),
                     TextFormField(
-                                          style: TextStyle(color: Colors.grey),
-
+                      style: TextStyle(color: Colors.grey),
                       obscureText: true,
                       decoration: InputDecoration(
-                        labelStyle:          TextStyle(color: Colors.grey),
-
+                          labelStyle: TextStyle(color: Colors.grey),
                           labelText: "Password",
                           prefixIcon: Icon(
                             Icons.lock,
@@ -176,7 +176,7 @@ class SignupScreen extends StatelessWidget {
                             style: const TextStyle(
                                 color: Colors.grey,
                                 decoration: TextDecoration.underline),
-                                recognizer: TapGestureRecognizer()
+                            recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 // nextScreen(context, const LoginPage());
                               }),

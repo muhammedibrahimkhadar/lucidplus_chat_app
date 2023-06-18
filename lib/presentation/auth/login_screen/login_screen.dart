@@ -46,40 +46,40 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   _headder(context),
-                  StreamBuilder(
-                    stream: FirebaseAuth.instance.authStateChanges(),
-                    builder: (context, snapshot) {
-                      if (signinButtonIsPressed) {
-                        if (snapshot.hasData) {
-                          return SizedBox();
-                        } else {
-                          return SizedBox(
-                            height: 15,
-                            child: Text(
-                              "incorrect credentials",
-                              style: TextStyle(color: Colors.red),
-                            ),
-                          );
-                        }
-                      } else
-                        return SizedBox();
-                    },
-                  ),
+                  // StreamBuilder(
+                  //   stream: FirebaseAuth.instance.authStateChanges(),
+                  //   builder: (context, snapshot) {
+                  //     if (signinButtonIsPressed) {
+                  //       if (snapshot.hasData) {
+                  //         return SizedBox();
+                  //       } else {
+                  //         return SizedBox(
+                  //           height: 15,
+                  //           child: Text(
+                  //             "incorrect credentials",
+                  //             style: TextStyle(color: Colors.red),
+                  //           ),
+                  //         );
+                  //       }
+                  //     } else
+                  //       return SizedBox();
+                  //   },
+                  // ),
                   _inputFields(context),
                   _signIn(context),
-                  StreamBuilder(
-                    stream: FirebaseAuth.instance.authStateChanges(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            RoutPaths.homeScreen,
-                            (Route<dynamic> route) => false);
-                        return SizedBox();
-                      } else {
-                        return SizedBox();
-                      }
-                    },
-                  )
+                  // StreamBuilder(
+                  //   stream: FirebaseAuth.instance.authStateChanges(),
+                  //   builder: (context, snapshot) {
+                  //     if (snapshot.hasData) {
+                  //       Navigator.of(context).pushNamedAndRemoveUntil(
+                  //           RoutPaths.homeScreen,
+                  //           (Route<dynamic> route) => false);
+                  //       return SizedBox();
+                  //     } else {
+                  //       return SizedBox();
+                  //     }
+                  //   },
+                  // )
                 ],
               )),
         ),
@@ -102,19 +102,18 @@ class _LoginScreenState extends State<LoginScreen> {
               "Sign In",
               style: TextStyle(color: Colors.white, fontSize: 16),
             ),
-            onPressed: () {
-              setState(() {
-                signinButtonIsPressed = true;
-              });
+            onPressed: ()async {
+              final re = await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: email!, password: password!);
+            if(re.user!=null){
+              Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        RoutPaths.homeScreen,
+                        (Route<dynamic> route) => false);
+            }
               log("email :$email");
               log("pass :$password");
 
-              BlocProvider.of<SigninScreenBloc>(context).add(
-                  SigninScreenEvent.authenticateLogin(
-                      ctx: context,
-                      password: password!,
-                      email: email!,
-                      formkey: formKey));
             },
           ),
         ),

@@ -8,27 +8,26 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+    BlocProvider.of<SplashScreenBloc>(context)
+        .add(SplashScreenEvent.started(ctx: context));
     return Scaffold(
       body: _buildUI(context),
     );
   }
 
   Container _buildUI(BuildContext ctx) {
-    BlocProvider.of<SplashScreenBloc>(ctx)
-        .add(SplashScreenEvent.started(ctx: ctx));
     return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [
-          Colors.black,
-          Color.fromARGB(255, 46, 46, 46),
-        ],
-        begin: Alignment.bottomLeft,
-        end: Alignment.topRight
-        )
-      ),
+      decoration: const BoxDecoration(
+          gradient: LinearGradient(colors: [
+        Colors.black,
+        Color.fromARGB(255, 46, 46, 46),
+      ], begin: Alignment.bottomLeft, end: Alignment.topRight)),
       child: Center(
-          child: SvgPicture.asset("assets/logo.svg",height: MediaQuery.of(ctx).size.width-80,width: MediaQuery.of(ctx).size.width-80,)),
+          child: SvgPicture.asset(
+        "assets/logo.svg",
+        height: MediaQuery.of(ctx).size.width - 80,
+        width: MediaQuery.of(ctx).size.width - 80,
+      )),
     );
   }
 }

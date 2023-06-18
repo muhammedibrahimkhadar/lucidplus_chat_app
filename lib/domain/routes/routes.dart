@@ -1,8 +1,10 @@
+
 import 'package:lucidplus_chat_app/presentation/auth/login_screen/login_screen.dart';
 import 'package:lucidplus_chat_app/presentation/auth/signup_screen/signup_screen.dart';
 import 'package:lucidplus_chat_app/presentation/home/home.dart';
 import 'package:lucidplus_chat_app/presentation/main_page.dart';
 import 'package:lucidplus_chat_app/presentation/splash_screen/splash_screen.dart';
+import 'package:lucidplus_chat_app/presentation/women_safty_web_view/women_safty_web_view.dart';
 
 mixin RoutPaths {
   static const String splashScreen = "/SPLASH_SCREEN";
@@ -10,6 +12,7 @@ mixin RoutPaths {
   static const String signUpScreen = "/SIGNUP_SCREEN";
   static const String homeScreen = "/HOME_SCREEN";
   static const String mainScreen = "/MAIN_SCREEN";
+   static const String webView = "/WEB_VIEW";
 }
 
 abstract class GetNamedRouts {
@@ -20,6 +23,7 @@ abstract class GetNamedRouts {
       RoutPaths.signUpScreen: (context) => SignupScreen(),
       RoutPaths.homeScreen: (context) => HomeScreen(),
       // RoutPaths.mainScreen: (context) => MainScreen(),
+      RoutPaths.webView:(context)=>WomenSaftyWebView()
     };
   }
 }

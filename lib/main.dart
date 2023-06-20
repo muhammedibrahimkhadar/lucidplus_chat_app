@@ -3,17 +3,29 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+// import 'package:hive/hive.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'infrastructure/global_database/firebase/firebase_options.dart';
+import 'infrastructure/local_database/hive.dart';
 import 'presentation/app.dart';
 
 Future<void> main() async {
+WidgetsFlutterBinding.ensureInitialized();
 
 
+ await Hive.initFlutter();
+  // Initialize Hive and open necessary boxes
+  await Hive.openBox<Contact>('contacts');
 
+  
+  final appDocumentDir = await getApplicationDocumentsDirectory();
 
-
-  WidgetsFlutterBinding.ensureInitialized();
+  Hive
+    ..init(appDocumentDir.path)
+    ..registerAdapter(ContactAdapter());
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

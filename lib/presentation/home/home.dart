@@ -1,11 +1,15 @@
 import 'dart:developer';
 import 'dart:async';
 
+import 'package:current_location/current_location.dart';
+import 'package:current_location/model/location.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:location_plus/location_plus.dart';
 import 'package:lottie/lottie.dart';
 import 'package:lucidplus_chat_app/domain/routes/routes.dart';
 import 'package:lucidplus_chat_app/infrastructure/global_database/signup_repo/irepo.dart';
@@ -17,6 +21,7 @@ import 'package:sensors_plus/sensors_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../infrastructure/global_database/telegram_apis/send_message/irepo.dart';
+import '../../infrastructure/local_database/hive.dart';
 import '../../infrastructure/local_database/secured_shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -32,8 +37,17 @@ class _HomeScreenState extends State<HomeScreen> {
   bool enterA_ValidID = false;
 
   String telegramId = "";
-
+  // Location
+  late String address;
   late bool val;
+
+  Future<String> loc() async {
+    String result = await LocationPlus.getCurrentLocation();
+
+    var loc = await Geolocator.getLocationAccuracy();
+    return loc.name;
+    // return result['locality'];
+  }
 
   late StreamSubscription _volumeButtonSubscription;
 
@@ -42,6 +56,13 @@ class _HomeScreenState extends State<HomeScreen> {
   StreamSubscription<String>? _buttonSubscription;
 
   double dx = 7, dy = 350;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loc();
+  }
 
   void getval() async {
     val = await FlutterLocalSecuredStorage().getbool("telegram_id");
@@ -69,19 +90,23 @@ class _HomeScreenState extends State<HomeScreen> {
           event.x <= -7 ||
           event.y <= -7 ||
           (event.z >= 7 || event.z <= -7)) {
-        var id = await FlutterLocalSecuredStorage().read(
-          "telegram_id",
-        );
+        final box = Hive.box<Contact>('contacts');
+        var contacts = box.values.toList();
+
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text("Sending Message"),
         ));
         final pos = await Geolocator.getCurrentPosition();
+
         print(pos);
         final stringPos =
             "https://maps.google.com/?q=${pos.latitude},${pos.longitude}";
         ITelegramSendMessageRepoImpl instance = ITelegramSendMessageRepoImpl();
-        instance.sendMessageTo(id,
-            "Dear user this is an SOS message in the case of EMERGENCY the users current location is at $stringPos");
+        contacts.forEach((element) {
+          log(element.contact.toString());
+          instance.sendMessageTo(element.contact,
+              "Dear user this is an SOS message in the case of EMERGENCY the users current location is at $stringPos");
+        });
       }
     });
     return Scaffold(
@@ -98,6 +123,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   _appbar(context),
                   _info(context),
+
+                  _addTelegramIds(context),
+                  _viewSavedUsers(),
+
                   // Container(
                   //   height: 450,
                   //   padding: const EdgeInsets.only(left: 30, right: 30),
@@ -203,6 +232,52 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  GestureDetector _viewSavedUsers() {
+    return GestureDetector(
+      onTap: () => Navigator.of(context).pushNamed(RoutPaths.savedUsers),
+      child: Container(
+        margin: EdgeInsets.only(left: 30, right: 30, top: 25),
+        alignment: Alignment.center,
+        height: 50,
+        decoration: BoxDecoration(
+            color: Color.fromARGB(255, 121, 238, 244),
+            borderRadius: BorderRadius.circular(15)),
+        child: const Text(
+          "View Registerd",
+          style: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: 13,
+            color: Color.fromARGB(255, 55, 90, 57),
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+  }
+
+  GestureDetector _addTelegramIds(BuildContext ctx) {
+    return GestureDetector(
+      onTap: () => Navigator.of(ctx).pushNamed(RoutPaths.addUser),
+      child: Container(
+        margin: EdgeInsets.only(left: 30, right: 30),
+        alignment: Alignment.center,
+        height: 50,
+        decoration: BoxDecoration(
+            color: Color.fromARGB(255, 231, 203, 118),
+            borderRadius: BorderRadius.circular(15)),
+        child: const Text(
+          "Add telegram ids",
+          style: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: 13,
+            color: Color.fromARGB(255, 55, 90, 57),
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+  }
+
   GestureDetector _womenSafetyWebRedirect(BuildContext context) {
     return GestureDetector(
       onTap: () {
@@ -212,7 +287,7 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       child: Container(
         alignment: Alignment.center,
-        margin: EdgeInsets.only(top: 100),
+        margin: EdgeInsets.only(top: 50, left: 30, right: 30),
         height: 50,
         width: 260,
         decoration: BoxDecoration(
@@ -227,6 +302,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
   Container _callForHelpSection(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 50, right: 25, left: 25),
@@ -236,9 +312,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               GestureDetector(
-                onTap: () {
-                  
-                },
+                onTap: () {},
                 child: Container(
                   height: 150,
                   decoration: BoxDecoration(
@@ -270,7 +344,7 @@ class _HomeScreenState extends State<HomeScreen> {
               GestureDetector(
                 onTap: () async {
                   final url =
-                      "https://www.google.com/maps/search/police+stations+near+me/";
+                      "https://www.google.com/maps/search/nearest+police+stations/";
                   try {
                     await launchUrl(Uri.parse(url));
                   } catch (e) {
@@ -317,31 +391,36 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                height: 150,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.pink),
-                    borderRadius: BorderRadius.circular(15)),
-                width: MediaQuery.of(context).size.width * (40 / 100),
-                child: Column(
-                  children: [
-                    LottieBuilder.asset(
-                      "assets/121527-tech-support-and-customer-service.json",
-                      height: 100,
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(bottom: 10),
-                      child: const Text(
-                        "Contact Women Safty\nCell",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 13,
-                          color: Colors.grey,
-                        ),
-                        textAlign: TextAlign.center,
+              GestureDetector(
+                onTap: () {
+                  launch("tel:+1090");
+                },
+                child: Container(
+                  height: 150,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.pink),
+                      borderRadius: BorderRadius.circular(15)),
+                  width: MediaQuery.of(context).size.width * (40 / 100),
+                  child: Column(
+                    children: [
+                      LottieBuilder.asset(
+                        "assets/121527-tech-support-and-customer-service.json",
+                        height: 100,
                       ),
-                    )
-                  ],
+                      Container(
+                        margin: EdgeInsets.only(bottom: 10),
+                        child: const Text(
+                          "Contact Women Safty\nCell",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 13,
+                            color: Colors.grey,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
               Container(
@@ -384,7 +463,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Container _info(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(right: 10, top: 10),
+      margin: EdgeInsets.only(right: 10, top: 10, bottom: 30),
       alignment: Alignment.centerRight,
       width: MediaQuery.of(context).size.width,
       child: GestureDetector(

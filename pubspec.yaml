@@ -15,6 +15,7 @@ dependencies:
   cloud_firestore: ^4.7.0
   contacts_service: ^0.6.3
   cupertino_icons: ^1.0.2
+  current_location: null
   dartz: ^0.10.1
   dio: ^4.0.4
   equatable: ^2.0.5
@@ -46,14 +47,16 @@ dependencies:
   intl: ^0.18.0
   json_annotation: ^4.7.0
   json_serializable: ^6.5.4
+  location_plus: null
   lottie: null
+  path_provider: ^2.0.15
   permission_handler: ^10.2.0
   pretty_dio_logger: ^1.1.1
   screen_manager: ^1.0.2
   sensors_plus: ^3.0.1
   shared_preferences: ^2.1.1
   teledart: ^0.4.0
-  url_launcher: 
+  url_launcher: null
   webview_flutter: ^2.0.14
 
 dev_dependencies:

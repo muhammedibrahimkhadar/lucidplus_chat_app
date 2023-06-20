@@ -225,6 +225,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  current_location:
+    dependency: "direct main"
+    description:
+      name: current_location
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.3"
   dart_style:
     dependency: transitive
     description:
@@ -730,6 +737,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  location_plus:
+    dependency: "direct main"
+    description:
+      name: location_plus
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.6"
   logging:
     dependency: transitive
     description:
@@ -815,7 +829,7 @@ packages:
     source: hosted
     version: "1.0.1"
   path_provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path_provider
       url: "https://pub.dartlang.org"
